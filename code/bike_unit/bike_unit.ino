@@ -5,6 +5,7 @@
 // NRF: CE= 7; SCK= 13; MISO= 12; CSN= 8; MOSI= 11;
 // ADXL335: X-OUT= A0; Y-OUT=A1; Z-OUT=A2;
 // ignition: pin= 1; 
+
 #include <LiquidCrystal.h>
 #include <SPI.h>
 #include <nRF24L01.h>
@@ -42,7 +43,7 @@ void loop() {
     Serial.print("\nrx data\n");
     void displaylcd(char text);
 
-    if(text=="SORRY Engine stop"){
+    if(text=="SORRY Engine stop"){ // Stop ignition incase of alcohol detected 
       digitalWrite(stop_pin,HIGH);
       Serial.print("Engine stop");
     }
@@ -85,7 +86,7 @@ void displaylcd(char text)  {      // Display receiving data
     lcd.print(text);
   }
 void crash(float pitch, float roll)  {
-    if (150 < pitch <350 || 150 < roll <350 )
+    if (150 < pitch <350 || 150 < roll <350 )//condition for Crash detected
     {
       const char text[] = "CRASH"; // NRF transmitting data
       Serial.println("tx data");

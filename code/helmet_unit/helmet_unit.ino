@@ -65,10 +65,10 @@ void loop() {
    }
 
   if (digitalRead(sos_button)==HIGH){        // Manually Sending Emergency SMS
-    EEBlue.println("SOS.....Send Emergency SMS ");
+    EEBlue.println("SOS...Send Emergency SMS ");
    }
    
-  if (radio.available()) {
+  if (radio.available()) {                  // NRF receiving mode
     char text[32] = "";
     radio.read(&text, sizeof(text));        // NRF receiving data
     delay(1000);
@@ -77,6 +77,7 @@ void loop() {
     EEBlue.println("SOS.....Send Emergency SMS "); // Sending Emergency SMS
   }
 }
+
 void task(int value){
   int data = map( value , 0 , 1023 , 0 , 255 );    // Convering the 10 bit value to 8 bit 
   // Feed data from bluetooth to termial 
