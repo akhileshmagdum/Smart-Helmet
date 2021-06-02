@@ -54,7 +54,7 @@ void loop() {
     Serial.print(test);
     delay(1000);
   
-    const char text[] = "WLCOME!! Good to go";// NRF transmitting data
+    const char text[] = "WLCOME!! Ready to go";// NRF transmitting data
     Serial.println("tx data");
     Serial.print(text);
     radio.write(&text, sizeof(text));
@@ -74,8 +74,9 @@ void loop() {
     delay(1000);
     Serial.println(text);
     Serial.print("\n rx data\n");
-    EEBlue.println("SOS.....Send Emergency SMS "); // Sending Emergency SMS
-  }
+    if (char text="FALL DETECTED"){
+    EEBlue.println("SOS.....Sending Emergency SMS "); // Sending Emergency SMS
+  }}
 }
 
 void task(int value){
@@ -84,8 +85,8 @@ void task(int value){
   EEBlue.write(data);
   if(0<data<12)                                    // No alcohol detected
   {
-        Serial.print("Good to go");
-        EEBlue.println("Good to go");
+        Serial.print("Good to Go");
+        EEBlue.println("Good to Go");
   }
   else if(12<data<16)                              // Some amount alcohol detected
   {
@@ -97,7 +98,7 @@ void task(int value){
   {
         Serial.print("Sorry we can not allow you to drive");
         EEBlue.println("Sorry we can not allow you to drive");
-        const char text2[] = "SORRY Engine stop"; // NRF transmitting data
+        const char text2[] = "ALCOHOL ALERT IGNITION OFFF"; // NRF transmitting data
         Serial.println("tx stop data ");
         Serial.print(text2);
         radio.write(&text2, sizeof(text2));

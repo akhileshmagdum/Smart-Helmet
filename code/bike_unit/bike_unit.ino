@@ -44,7 +44,7 @@ void loop() {
     Serial.print("\nrx data\n");
     void displaylcd(char text);
 
-      if(text=="SORRY Engine stop"){ // Stop ignition incase of alcohol detected 
+      if(text=="ALCOHOL ALERT IGNITION OFFF"){ // Stop ignition incase of alcohol detected 
        digitalWrite(stop_pin,HIGH);
        Serial.print("Engine stop");
      }
@@ -92,9 +92,9 @@ void displaylcd(char text)  {      // Display receiving data
     lcd.print(text);
   }
 void crash(float pitch, float roll)  {
-    if (150 < pitch <350 || 150 < roll <350 )//condition for Crash detected
+    if (150 < pitch <350 || 150 < roll <350 )//condition for fall detected
     {
-      const char text[] = "CRASH"; // NRF transmitting data
+      const char text[] = "FALL DETECTED"; // NRF transmitting data
       Serial.println("tx data");
       Serial.print(text);
       radio.write(&text, sizeof(text));
